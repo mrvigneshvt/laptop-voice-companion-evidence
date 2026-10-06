@@ -1,0 +1,17 @@
+VOICE CLONING GATE — reproduced live 2026-10-06 on pocket-tts
+-------------------------------------------------------------
+POST /tts with -F "voice_wav=@ref_voice.wav"  ->  HTTP 500 "Internal Server Error"
+
+Server traceback (exact):
+ValueError: We could not download the weights for the model with voice cloning,
+but you're trying to use voice cloning. Without voice cloning, you can use our
+catalog of voices ['cosette', 'marius', 'javert', 'alba', 'jean', 'anna', 'vera',
+'fantine', 'charles', 'paul', 'eponine', 'azelma', 'george', 'mary', 'jane',
+'michael', 'eve', 'bill_boerst', 'peter_yearsley', 'stuart_bell', 'caro_davy',
+'giovanni', 'lola', 'juergen', 'rafael', 'daan', 'estelle'].
+
+Fix (user action required): go to https://huggingface.co/kyutai/pocket-tts ,
+accept the terms, then authenticate locally (`hf auth login`).
+
+So: the 27 built-in voices work with NO authentication.
+     Voice cloning (any custom voice) requires accepting HF terms + login.
