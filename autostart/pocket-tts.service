@@ -1,0 +1,20 @@
+[Unit]
+Description=Kyutai Pocket TTS warm server (azelma voice) for Hermes
+Documentation=https://azelma-integration-bvwal8-f9c2af-147-93-152-155.sslip.io
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# pin to 4 cores to match this laptop and leave headroom for Hermes itself
+ExecStart=/usr/bin/taskset -c 0-3 /home/%u/pocket-tts/bin/pocket-tts serve --host 127.0.0.1 --port 8021 --default-voice azelma
+Restart=always
+RestartSec=5
+# keep the model warm: don't let systemd reap it aggressively
+TimeoutStopSec=20
+# generous start period: first run may download weights (~400 MB)
+TimeoutStartSec=900
+Environment=POCKET_TTS_PORT=8021
+
+[Install]
+WantedBy=default.target
